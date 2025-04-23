@@ -16,7 +16,7 @@ import { Document } from "@langchain/core/documents";
 // --- Define Inline Helper ---
 // Define formatting logic inline to avoid import issues
 const formatDocumentsAsString = (docs: Document[]): string => {
-   return docs.map(doc => doc.pageContent).join("\n\n");
+   return docs.map(doc => doc.page_content).join("\n\n");
 };
 
 // --- Set Runtime ---
