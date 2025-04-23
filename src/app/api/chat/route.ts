@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
         // This creates the specific format the useChat hook expects
         return streamResult.toDataStreamResponse(); // <<< CORRECT RETURN TYPE
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("[API /api/chat] Error processing request:", error);
         console.error("[API /api/chat] Error details:", error.message, error.stack);
         return NextResponse.json(
