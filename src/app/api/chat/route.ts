@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
 
         // --- 3. Call the AI model using Vercel AI SDK 'streamText' ---
         // Get the Vercel AI SDK OpenAI provider instance
-        const model = openai(chatModelName, { apiKey: openAIApiKey });
+        const model = openai(chatModelName);
 
         console.log(`[API /api/chat] Calling model '${chatModelName}' via streamText...`);
 
