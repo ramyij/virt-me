@@ -122,11 +122,32 @@ export async function POST(req: NextRequest) {
         // This creates the specific format the useChat hook expects
         return streamResult.toDataStreamResponse(); // <<< CORRECT RETURN TYPE
 
-    } catch (error: unknown) {
-        console.error("[API /api/chat] Error processing request:", error);
-        console.error("[API /api/chat] Error details:", error.message, error.stack);
+    } catch (error: unknown) { // Keep 'unknown'
+        console.error("[API /api/chat] Error processing request:", error); // Log the raw error object
+
+        // Initialize default error details
+        let errorMessage = "An unknown error occurred.";
+        let errorStack: string | undefined = undefined; // Initialize stack as undefined
+
+        // Check if the error is an instance of Error to safely access properties
+        if (error instanceof Error) {
+            errorMessage = error.message;
+            errorStack = error.stack;
+        } else if (typeof error === 'string') {
+            // Handle cases where a string might have been thrown
+            errorMessage = error;
+        }
+        // You could add more checks here for other potential error types if needed
+
+        // Log the extracted/determined details
+        console.error("[API /api/chat] Error details - Message:", errorMessage);
+        if (errorStack) { // Only log stack if it exists
+             console.error("[API /api/chat] Error details - Stack:", errorStack);
+        }
+
+        // Return the JSON response with the determined error message
         return NextResponse.json(
-             { error: "An error occurred while processing your request.", details: error.message },
+             { error: "An error occurred while processing your request.", details: errorMessage },
              { status: 500 }
         );
     }
