@@ -1,8 +1,9 @@
 // src/app/api/chat/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 // Corrected: Use 'ai' package for core Vercel AI SDK functions and types
-import { Message, streamText } from 'ai';
 import { openai } from '@ai-sdk/openai'; // Keep OpenAI provider import
+import { Message, streamText } from 'ai';
+
 
 // --- Core Langchain/AI Imports (for Retrieval) ---
 import { OpenAIEmbeddings } from '@langchain/openai';
@@ -20,7 +21,7 @@ const formatDocumentsAsString = (docs: Document[]): string => {
 
 // --- Set Runtime ---
 // Edge is preferred for Vercel AI SDK Core
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 // export const runtime = 'nodejs'; // Use nodejs if edge causes dependency issues
 
 // --- Configuration ---
