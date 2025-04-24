@@ -44,7 +44,7 @@ export default function ChatInterface() {
           ))
         ) : (
           <div className="text-center text-gray-500">
-            Start the conversation by asking a question about me!
+            Start the interview by asking me a question about my professional or personal background!
           </div>
         )}
         {/* Display loading indicator */}

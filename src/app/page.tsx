@@ -50,48 +50,74 @@ const Button: React.FC<ButtonProps> = ({ children, className, variant = 'primary
 export default function HomePage() {
   return (
     // Using min-h-screen ensures it takes at least the full viewport height
-    <div className="relative min-h-screen flex items-center justify-center text-white overflow-hidden">
-      {/* Background Image */}
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#4b533c]">
+      {/* Background Image - Commented Out
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
+        className="absolute inset-0 z-0 bg-contain bg-top bg-no-repeat"
         style={{ backgroundImage: `url(${BACKGROUND_IMAGE_URL})` }}
       >
-        {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-black opacity-30"></div>
       </div>
+      */}
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center p-8 max-w-3xl mx-auto">
-        {/* Headshot */}
-        <img
-          src={HEADSHOT_IMAGE_URL}
-          alt="Ramy Jaber Headshot"
-          className="w-36 h-36 rounded-full mb-6 border-4 border-gray-400 shadow-lg object-cover" 
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.onerror = null; // Prevent infinite loop
-            target.src = 'https://placehold.co/150x150/a3a3a3/ffffff?text=RJ'; // Fallback
-          }}
-        />
+      {/* Content - Adjusted Layout */}
+      <div className="relative z-10 flex flex-col items-center p-4 md:p-8 max-w-5xl mx-auto w-full">
 
-        {/* Blurb */}
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Ramy Jaber</h1>
-        <p className="text-lg md:text-xl mb-8 text-gray-200 leading-relaxed">
-          {/* Replace with your actual blurb */}
-          Cloud Solution Architect specializing in Large Language Models (LLMs) and performance engineering. Experienced in technical pre-sales, GTM strategy, team leadership, and driving significant business growth through innovative AI solutions. Passionate about bridging the gap between complex technology and real-world business value.
-        </p>
+        {/* Container for Headshot & Text Block (Flex on Medium+ screens) */}
+        <div className="flex flex-col md:flex-row items-center w-full">
+
+          {/* Headshot (Larger, positioned left on md+) */}
+          <div className="flex-shrink-0 mb-6 md:mb-0 md:mr-[-5rem] z-0">
+            <img
+              src={HEADSHOT_IMAGE_URL}
+              alt="Ramy Jaber Headshot"
+              className="w-96 h-96 md:w-112 md:h-112 rounded-full border-4 border-gray-400 shadow-lg object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null; // Prevent infinite loop
+                target.src = 'https://placehold.co/150x150/a3a3a3/ffffff?text=RJ'; // Fallback
+              }}
+            />
+          </div>
+
+          {/* Text Block (Overlaps Headshot on md+) */}
+          <div className="relative z-10 bg-gray-800/90 text-white py-4 px-6 md:py-6 md:px-8 rounded-lg shadow-xl flex-grow text-center md:text-left md:mt-20">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">Ramy Jaber</h1>
+            <p className="text-base md:text-lg mb-6 text-gray-200 leading-relaxed">
+              {/* Replace with your actual blurb */}
+              Cloud Solution Architect specializing in Large Language Models (LLMs) and performance engineering. Experienced in technical pre-sales, GTM strategy, team leadership, and driving significant business growth through innovative AI solutions. Passionate about bridging the gap between complex technology and real-world business value.
+            </p>
+          </div>
+        </div>
 
         {/* Buttons - Use Link component via Button's href prop */}
-        <div className="flex flex-wrap justify-center gap-4">
-          <Button href="/chat" variant="primary">
-            Interview Me (AI Chat)
-          </Button>
-          <Button href="/personal" variant="secondary">
-            Personal
-          </Button>
-          <Button href="/career" variant="secondary">
-            Career
-          </Button>
+        {/* Container adjusted for icon placeholders */}
+        <div className="flex flex-wrap justify-center items-start gap-8 md:gap-12 mt-[10vh] mb-80">
+
+          {/* Chat Button + Icon */}
+          <div className="flex flex-col items-center">
+            <img src="/images/icon-chat.svg" alt="Interview Me Icon" className="w-48 h-48 mb-2" /> {/* Placeholder Icon */}
+            <Button href="/chat" variant="primary">
+              Interview Me (AI Chat)
+            </Button>
+          </div>
+
+          {/* Personal Button + Icon */}
+          <div className="flex flex-col items-center">
+            <img src="/images/icon-personal.svg" alt="Personal Icon" className="w-24 h-24 mb-16 mt-10 ml-20 mr-25" /> {/* Placeholder Icon */}
+            <Button href="/personal" variant="secondary">
+              Personal
+            </Button>
+          </div>
+
+          {/* Career Button + Icon */}
+          <div className="flex flex-col items-center">
+            <img src="/images/icon-career.svg" alt="Career Icon" className="w-24 h-24 mb-14 mt-10 ml-20 mr-25" /> {/* Placeholder Icon */}
+            <Button href="/career" variant="secondary">
+              Career
+            </Button>
+          </div>
+
         </div>
       </div>
     </div>
