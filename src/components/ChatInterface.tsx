@@ -11,6 +11,7 @@ export default function ChatInterface() {
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
     // Point the hook to your backend API route
     api: '/api/chat',
+    maxSteps: 3,
     // Optional: Initial messages or other configurations
     // initialMessages: [ { id: 'initial', role: 'system', content: 'Ask me about my experience!' } ],
     // onError: (err) => { console.error("Chat error:", err); /* Handle errors */ }

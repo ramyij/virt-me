@@ -1,28 +1,30 @@
 // src/app/api/chat/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-// Corrected: Use 'ai' package for core Vercel AI SDK functions and types
-import { openai } from '@ai-sdk/openai'; // Keep OpenAI provider import
-import { Message, streamText } from 'ai';
+// Use 'ai' package for core Vercel AI SDK functions and types
+import { Message, streamText, tool, Tool } from 'ai'; // Added 'Tool' type import
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod'; // Import zod for tool parameters
 
-
-// --- Core Langchain/AI Imports (for Retrieval) ---
+// --- Core Langchain/AI Imports (for Retrieval & Adding Info) ---
 import { OpenAIEmbeddings } from '@langchain/openai';
 import { PineconeStore } from "@langchain/pinecone";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { PromptTemplate } from "@langchain/core/prompts";
-import { RunnableLambda } from "@langchain/core/runnables"; // Needed for retriever input fix
+import { RunnableLambda } from "@langchain/core/runnables";
 import { Document } from "@langchain/core/documents";
+import { v4 as uuidv4 } from 'uuid'; // Import uuid for generating IDs for new docs
 
 // --- Define Inline Helper ---
-// Define formatting logic inline to avoid import issues
 const formatDocumentsAsString = (docs: Document[]): string => {
+   // Add a check for empty docs array
+   if (!docs || docs.length === 0) {
+       return "No relevant context found.";
+   }
    return docs.map(doc => doc.pageContent).join("\n\n");
 };
 
 // --- Set Runtime ---
-// Edge is preferred for Vercel AI SDK Core
-export const runtime = 'nodejs';
-// export const runtime = 'nodejs'; // Use nodejs if edge causes dependency issues
+export const runtime = 'nodejs'; // Keep nodejs for Pinecone compatibility
 
 // --- Configuration ---
 const openAIApiKey = process.env.OPENAI_API_KEY;
@@ -33,39 +35,34 @@ const pineconeIndexName = process.env.PINECONE_INDEX;
 // --- Environment Variable Check ---
 if (!openAIApiKey || !pineconeApiKey || !pineconeHost || !pineconeIndexName) {
     console.error("FATAL ERROR: Missing required environment variables!");
-    // In non-edge environments, you might throw an error here
-    // if (runtime === 'nodejs') throw new Error("Missing required environment variables!");
+    throw new Error("Missing required environment variables!");
 }
 
-// --- Model & Retrieval Settings ---
+// --- Model & Retrieval/Addition Settings ---
 const embeddingModelName = 'text-embedding-3-small';
-const chatModelName = 'gpt-3.5-turbo';
+const chatModelName = 'gpt-3.5-turbo'; // Or 'gpt-4-turbo' etc.
 const retrievalDocsCount = 4;
 
-// --- Prompt Template ---
-const TEMPLATE_STRING = `You are Virtual Me, an AI assistant representing the person whose information is in the documents provided.
-Answer the user's question based *only* on the context below.
-If the context doesn't contain the answer, state that you don't have that specific information in your documented knowledge.
-Be conversational and answer from the first-person perspective (e.g., "I worked on...", "My experience includes...").
-Do not make up information or discuss topics outside the provided context.
+// --- System Prompt (Updated - Add tool might be unavailable) ---
+const SYSTEM_PROMPT = `You are Virtual Me, an AI assistant representing the person whose information is in your knowledge base.
+You have access to a tool called 'getInformation'. You MIGHT also have access to a tool called 'addInformation' only in specific environments.
 
-Context:
-{context}
+**Tool Usage Rules:**
+1.  **Answering Questions:** When asked a question, you MUST use the 'getInformation' tool first to retrieve relevant context. Answer based *only* on the context provided by the tool. If the tool returns 'No relevant information found...' or the context doesn't answer the question, state that you don't have the specific information documented.
+2.  **Adding Information:** If the 'addInformation' tool is available and the user provides new information about themselves or asks you to remember something, use the 'addInformation' tool. After the tool runs, confirm the result to the user (e.g., "Okay, I've added that..."). If the tool is unavailable, inform the user you cannot add information in this environment.
 
-Question: {question}
+**General Rules:**
+* Always be conversational and answer from the first-person perspective (e.g., "I worked on...", "My experience includes...").
+* Do not make up information.
+* After any available tool runs, generate a final response to the user based on the tool's output.`;
 
-Answer (respond as "I"):`;
 
 // --- API Route Handler ---
 export async function POST(req: NextRequest) {
-    if (!openAIApiKey || !pineconeApiKey || !pineconeHost || !pineconeIndexName) {
-         console.error("API Error: Missing environment variables during request processing.");
-         return NextResponse.json({ error: "Internal configuration error." }, { status: 500 });
-    }
+    // Environment variables checked at startup
 
     try {
         const body = await req.json();
-        // Use Message type from 'ai' package
         const messages: Message[] = body.messages ?? [];
         const currentMessageContent = messages[messages.length - 1]?.content;
 
@@ -75,77 +72,126 @@ export async function POST(req: NextRequest) {
         }
 
         console.log(`[API /api/chat] Received query: "${currentMessageContent}"`);
+        console.log(`[API /api/chat] Environment NODE_ENV: ${process.env.NODE_ENV}`); // Log environment
 
-        // --- Initialize Embeddings & Pinecone (using Langchain for Retrieval) ---
+        // --- Initialize Embeddings Client (used by tools) ---
         const embeddings = new OpenAIEmbeddings({ openAIApiKey, model: embeddingModelName });
-        const pinecone = new Pinecone({ apiKey: pineconeApiKey });
-        const pineconeIndex = pinecone.Index(pineconeIndexName, pineconeHost);
-        const vectorStore = await PineconeStore.fromExistingIndex(embeddings, { pineconeIndex });
-        const retriever = vectorStore.asRetriever({ k: retrievalDocsCount });
 
-        // --- 1. Retrieve Relevant Documents (using Langchain) ---
-        // Use RunnableLambda to correctly pass the string query to the retriever
-        const retrieveDocs = RunnableLambda.from(async (input: string) => {
-             // Ensure retriever is correctly initialized before calling
-             if (!retriever) throw new Error("Retriever not initialized");
-             return await retriever.getRelevantDocuments(input);
-        });
-        const relevantDocs = await retrieveDocs.invoke(currentMessageContent);
+        // --- Define Tools ---
+        // Tool to Retrieve Information (Always available)
+        const getInformationTool: Tool = tool({
+            description: `Retrieve relevant information from the knowledge base based on the user's question. Always use this tool first when asked a question.`,
+            parameters: z.object({
+                question: z.string().describe('The user question to search for in the knowledge base'),
+            }),
+            execute: async ({ question }) => {
+                console.log(`[Tool getInformation] Searching for: "${question}"`);
+                // Check env vars needed specifically for this tool
+                if (!pineconeApiKey || !pineconeHost || !pineconeIndexName || !openAIApiKey) {
+                    return "Error: Tool is missing required configuration.";
+                }
+                try {
+                    // Initialize clients within the tool execution
+                    const toolEmbeddings = new OpenAIEmbeddings({ openAIApiKey, model: embeddingModelName });
+                    const pinecone = new Pinecone({ apiKey: pineconeApiKey });
+                    const pineconeIndex = pinecone.Index(pineconeIndexName, pineconeHost);
+                    const vectorStore = await PineconeStore.fromExistingIndex(toolEmbeddings, { pineconeIndex });
+                    const retriever = vectorStore.asRetriever({ k: retrievalDocsCount });
 
-        // Format the retrieved documents into a single string context
-        const context = formatDocumentsAsString(relevantDocs); // Use inline helper
+                    const relevantDocs = await retriever.getRelevantDocuments(question);
+                    console.log(`[Tool getInformation] Retrieved ${relevantDocs.length} documents.`);
 
-        console.log(`[API /api/chat] Retrieved ${relevantDocs.length} documents for context.`);
-        // console.log(`[API /api/chat] Context:\n---\n${context}\n---`); // Uncomment for debugging context
+                    // Use the updated helper function which handles empty arrays
+                    const context = formatDocumentsAsString(relevantDocs);
+                    return context; // Return context (or "No relevant context found.") to the LLM
+                } catch (toolError: unknown) {
+                    console.error("[Tool getInformation] Error:", toolError);
+                    const message = (toolError instanceof Error) ? toolError.message : "Unknown error";
+                    return `Error executing information retrieval: ${message}`;
+                }
+            },
+        }); // End of getInformation tool
 
-        // --- 2. Construct the Final Prompt String ---
-        // Use Langchain's PromptTemplate or simple string formatting
-        const prompt = await PromptTemplate.fromTemplate(TEMPLATE_STRING).format({
-            context: context,
-            question: currentMessageContent,
-        });
+        // --- Conditionally Define addInformation Tool ---
+        // Initialize availableTools object with the always-present getInformation tool
+        const availableTools: Record<string, Tool> = { getInformation: getInformationTool };
 
-        // --- 3. Call the AI model using Vercel AI SDK 'streamText' ---
-        // Get the Vercel AI SDK OpenAI provider instance
-        const model = openai(chatModelName);
+        // Check the environment variable
+        if (process.env.NODE_ENV === 'development') {
+            console.log("[API /api/chat] Development environment detected. Enabling 'addInformation' tool.");
+            // Define and add the addInformation tool ONLY in development
+            availableTools.addInformation = tool({
+                description: "Adds new information provided by the user to the knowledge base. Use this when the user gives new facts about themselves or asks to remember something. This tool is only available in specific environments.",
+                parameters: z.object({
+                    content: z.string().describe("The new piece of information or fact to add to the knowledge base."),
+                }),
+                execute: async ({ content }) => {
+                    console.log(`[Tool addInformation] Received content: "${content}"`);
+                     // Check env vars needed specifically for this tool
+                    if (!pineconeApiKey || !pineconeHost || !pineconeIndexName || !openAIApiKey) {
+                        return "Error: Tool is missing required configuration.";
+                    }
+                    try {
+                        // Initialize Pinecone connection within the tool execution
+                        const pinecone = new Pinecone({ apiKey: pineconeApiKey });
+                        const pineconeIndex = pinecone.Index(pineconeIndexName, pineconeHost);
+                        // Re-use embeddings initialized outside the tool scope
+                        const vectorStore = await PineconeStore.fromExistingIndex(embeddings, { pineconeIndex });
 
-        console.log(`[API /api/chat] Calling model '${chatModelName}' via streamText...`);
+                        // Create a Langchain Document for the new piece of information
+                        const newDoc = new Document({
+                            pageContent: content,
+                            metadata: { source: 'chat_addition', timestamp: new Date().toISOString() }
+                        });
 
-        // Call streamText (imported from 'ai') with the model and the final formatted prompt
-        const streamResult = await streamText({
-            model: model,
-            prompt: prompt,
+                        // Generate a unique ID
+                        const newId = uuidv4();
+
+                        // Add the document to Pinecone
+                        await vectorStore.addDocuments([newDoc], { ids: [newId] });
+
+                        console.log(`[Tool addInformation] Successfully added document with ID: ${newId}`);
+                        // Return confirmation message to the LLM
+                        return "Successfully added the new information to the knowledge base.";
+
+                    } catch (toolError: unknown) {
+                        console.error("[Tool addInformation] Error:", toolError);
+                         const message = (toolError instanceof Error) ? toolError.message : "Unknown error";
+                        return `Error adding information to the knowledge base: ${message}`;
+                    }
+                },
+            }); // End of addInformation tool definition
+        } else {
+             console.log("[API /api/chat] Production environment detected. 'addInformation' tool is disabled.");
+        }
+
+
+        // --- Call streamText with Available Tools ---
+        const result = await streamText({
+            model: openai(chatModelName), // API key read from env
+            system: SYSTEM_PROMPT,
+            messages,
             temperature: 0.3,
+            tools: availableTools, // Pass the conditionally populated tools object
         });
 
-        // --- 4. Return the stream as a Data Stream Response ---
-        // This creates the specific format the useChat hook expects
-        return streamResult.toDataStreamResponse(); // <<< CORRECT RETURN TYPE
+        // --- Return the Data Stream Response ---
+        return result.toDataStreamResponse();
 
-    } catch (error: unknown) { // Keep 'unknown'
-        console.error("[API /api/chat] Error processing request:", error); // Log the raw error object
-
-        // Initialize default error details
+    } catch (error: unknown) {
+        console.error("[API /api/chat] Error processing request:", error);
         let errorMessage = "An unknown error occurred.";
-        let errorStack: string | undefined = undefined; // Initialize stack as undefined
-
-        // Check if the error is an instance of Error to safely access properties
+        let errorStack: string | undefined = undefined;
         if (error instanceof Error) {
             errorMessage = error.message;
             errorStack = error.stack;
         } else if (typeof error === 'string') {
-            // Handle cases where a string might have been thrown
             errorMessage = error;
         }
-        // You could add more checks here for other potential error types if needed
-
-        // Log the extracted/determined details
         console.error("[API /api/chat] Error details - Message:", errorMessage);
-        if (errorStack) { // Only log stack if it exists
+        if (errorStack) {
              console.error("[API /api/chat] Error details - Stack:", errorStack);
         }
-
-        // Return the JSON response with the determined error message
         return NextResponse.json(
              { error: "An error occurred while processing your request.", details: errorMessage },
              { status: 500 }
