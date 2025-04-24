@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
 
   // In a real app router setup, determining active state might use usePathname hook
   // For simplicity here, we won't highlight the active link, but you can add that logic
-  const getLinkStyle = (isActive: boolean = false) => { // Simplified style logic
+  const getLinkStyle = () => { // Simplified style logic
     const base = "px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out cursor-pointer";
     const active = "bg-gray-900 text-white"; // Example active style
     const inactive = "text-gray-300 hover:bg-gray-700 hover:text-white";
