@@ -15,13 +15,13 @@ const Navbar: React.FC = () => {
 
   // In a real app router setup, determining active state might use usePathname hook
   // For simplicity here, we won't highlight the active link, but you can add that logic
-  const getLinkStyle = () => { // Simplified style logic
-    const base = "px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out cursor-pointer";
-    const active = "bg-gray-900 text-white"; // Example active style
-    const inactive = "text-gray-300 hover:bg-gray-700 hover:text-white";
-    // return `${base} ${isActive ? active : inactive}`; // Use this line if you implement active state later
-     return `${base} ${inactive}`; // Default to inactive for now
-  };
+  // const getLinkStyle = () => { // Simplified style logic
+  //   const base = "px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out cursor-pointer";
+  //   // const active = "bg-gray-900 text-white"; // Example active style
+  //   const inactive = "text-gray-300 hover:bg-gray-700 hover:text-white";
+  //   // return `${base} ${isActive ? active : inactive}`; // Use this line if you implement active state later
+  //    return `${base} ${inactive}`; // Default to inactive for now
+  // };
 
   return (
     <nav className="bg-gray-800 shadow-lg sticky top-0 z-50">
@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={getLinkStyle()} // Pass active state logic here if needed
+                  // className={getLinkStyle()} // Pass active state logic here if needed
                 >
                   {item.name}
                 </Link>
