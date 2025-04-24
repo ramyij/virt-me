@@ -5,7 +5,7 @@ import React from 'react';
 import Link from 'next/link'; // Import Link for navigation buttons
 
 // --- Placeholder Images (Replace with your actual image URLs) ---
-const BACKGROUND_IMAGE_URL = '/images/background.jpg'; // Example using public folder
+// const BACKGROUND_IMAGE_URL = '/images/background.jpg'; // Example using public folder
 const HEADSHOT_IMAGE_URL = '/images/headshot.jpg'; // Example using public folder
 
 // --- Reusable Button Component (Can be moved to its own file) ---
