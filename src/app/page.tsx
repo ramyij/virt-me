@@ -27,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({ children, className, variant = 'primary
     return (
       // Remove legacyBehavior. Link now renders its own <a> tag.
       // Apply the combined styles directly to the Link component.
-      <Link href={href} className={combinedClassName} {...props}>
+      <Link href={href} className={combinedClassName}>
         {children}
       </Link>
     );
