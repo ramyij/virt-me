@@ -9,8 +9,8 @@ import { z } from 'zod'; // Import zod for tool parameters
 import { OpenAIEmbeddings } from '@langchain/openai';
 import { PineconeStore } from "@langchain/pinecone";
 import { Pinecone } from "@pinecone-database/pinecone";
-import { PromptTemplate } from "@langchain/core/prompts";
-import { RunnableLambda } from "@langchain/core/runnables";
+// import { PromptTemplate } from "@langchain/core/prompts";
+// import { RunnableLambda } from "@langchain/core/runnables";
 import { Document } from "@langchain/core/documents";
 import { v4 as uuidv4 } from 'uuid'; // Import uuid for generating IDs for new docs
 
