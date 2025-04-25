@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link'; // Optional: If needed for other links
+// import Link from 'next/link'; // Optional: If needed for other links
 
 // Updated function name
 export default function ResumePage() {
