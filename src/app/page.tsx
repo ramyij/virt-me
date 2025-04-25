@@ -12,25 +12,43 @@ const HEADSHOT_IMAGE_URL = '/images/headshot.jpg'; // Example using public folde
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary';
   href?: string; // Add href for linking
+  icon?: React.ReactNode; // Add icon prop
 }
 
-const Button: React.FC<ButtonProps> = ({ children, className, variant = 'primary', href, ...props }) => {
+const Button: React.FC<ButtonProps> = ({ children, className, variant = 'primary', href, icon, ...props }) => {
   const baseStyle = "inline-block px-6 py-2 rounded-full font-semibold transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md text-center";
   const primaryStyle = "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500";
   const secondaryStyle = "bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-400";
 
-  // Combine base, variant, and any additional classes
-  const combinedClassName = `${baseStyle} ${variant === 'primary' ? primaryStyle : secondaryStyle} ${className}`;
+  const combinedClassName = `${baseStyle} inline-flex items-center ${variant === 'primary' ? primaryStyle : secondaryStyle} ${className}`;
 
-  // If href is provided, render a Next.js Link component
+  // Check if the link is external
+  const isExternal = href && (href.startsWith('http://') || href.startsWith('https://'));
+
+  // If href is provided, render a Next.js Link or a standard <a> tag
   if (href) {
-    return (
-      // Remove legacyBehavior. Link now renders its own <a> tag.
-      // Apply the combined styles directly to the Link component.
-      <Link href={href} className={combinedClassName}>
-        {children}
-      </Link>
-    );
+    if (isExternal) {
+      // Use a standard <a> tag for external links
+      return (
+        <a
+          href={href}
+          className={combinedClassName}
+          target="_blank" // Open in new tab
+          rel="noopener noreferrer" // Security measure
+        >
+          {icon} {/* Render icon */}
+          {children}
+        </a>
+      );
+    } else {
+      // Use Next.js Link for internal navigation
+      return (
+        <Link href={href} className={combinedClassName}>
+          {icon} {/* Render icon */}
+          {children}
+        </Link>
+      );
+    }
   }
 
   // Fallback to regular button if no href
@@ -102,19 +120,19 @@ export default function HomePage() {
             </Button>
           </div>
 
-          {/* Personal Button + Icon */}
+          {/* Photography Button + Icon */}
           <div className="flex flex-col items-center">
-            <img src="/images/icon-personal.svg" alt="Personal Icon" className="w-24 h-24 mb-16 mt-10 ml-20 mr-25" /> {/* Placeholder Icon */}
-            <Button href="/personal" variant="secondary">
-              Personal
+            <img src="/images/icon-personal.svg" alt="Photography Icon" className="w-24 h-24 mb-16 mt-10 ml-20 mr-25" /> {/* Placeholder Icon */}
+            <Button href="https://photos.ramyjaber.com" variant="secondary">
+              Photography
             </Button>
           </div>
 
-          {/* Career Button + Icon */}
+          {/* Resume Button + Icon (Formerly Career) */}
           <div className="flex flex-col items-center">
-            <img src="/images/icon-career.svg" alt="Career Icon" className="w-24 h-24 mb-14 mt-10 ml-20 mr-25" /> {/* Placeholder Icon */}
-            <Button href="/career" variant="secondary">
-              Career
+            <img src="/images/icon-career.svg" alt="Resume Icon" className="w-24 h-24 mb-14 mt-10 ml-20 mr-25" />
+            <Button href="/resume" variant="secondary">
+              Resume
             </Button>
           </div>
 

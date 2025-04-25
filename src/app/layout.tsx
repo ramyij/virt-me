@@ -13,8 +13,8 @@ const Navbar: React.FC = () => {
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Chat', href: '/chat' },
-    { name: 'Personal', href: '/personal' },
-    { name: 'Career', href: '/career' },
+    { name: 'Photography', href: 'https://photos.ramyjaber.com' },
+    { name: 'Resume', href: '/resume' },
   ];
 
   // In a real app router setup, determining active state might use usePathname hook
@@ -35,25 +35,44 @@ const Navbar: React.FC = () => {
           {/* Navigation Links (Moved Left) */}
           <div className="flex items-center">
             <div className="flex items-baseline space-x-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={getLinkStyle()} // Pass active state logic here if needed
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const isExternal = item.href.startsWith('http');
+                const linkStyle = getLinkStyle();
+
+                if (isExternal) {
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className={linkStyle}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.name}
+                    </a>
+                  );
+                } else {
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={linkStyle}
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                }
+              })}
             </div>
           </div>
 
           {/* Social Media Links (Added Right) */}
           <div className="flex items-center space-x-4">
-            <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
+            <a href="https://linkedin.com/in/ramyj" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
               {/* Replace with LinkedIn Icon SVG or Component */}
               <span className="text-sm">LinkedIn</span>
             </a>
-            <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
+            <a href="https://github.com/ramyij" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
               {/* Replace with GitHub Icon SVG or Component */}
               <span className="text-sm">GitHub</span>
             </a>
