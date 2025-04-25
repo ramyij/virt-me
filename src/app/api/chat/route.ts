@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Message, streamText, tool, Tool } from 'ai'; // Added 'Tool' type import
 import { openai } from '@ai-sdk/openai';
 import { z } from 'zod'; // Import zod for tool parameters
+import fs from 'fs/promises'; // Import Node.js file system module
+import path from 'path'; // Import Node.js path module
 
 // --- Core Langchain/AI Imports (for Retrieval & Adding Info) ---
 import { OpenAIEmbeddings } from '@langchain/openai';
@@ -43,7 +45,8 @@ const embeddingModelName = 'text-embedding-3-small';
 const chatModelName = 'gpt-3.5-turbo'; // Or 'gpt-4-turbo' etc.
 const retrievalDocsCount = 4;
 
-// --- System Prompt (Updated - Add tool might be unavailable) ---
+// --- System Prompt (Commented out - will be loaded from file) ---
+/*
 const SYSTEM_PROMPT = `You are Virtual Me, an AI assistant representing the person whose information is in your knowledge base.
 You have access to a tool called 'getInformation'. You MIGHT also have access to a tool called 'addInformation' only in specific environments.
 
@@ -55,13 +58,18 @@ You have access to a tool called 'getInformation'. You MIGHT also have access to
 * Always be conversational and answer from the first-person perspective (e.g., "I worked on...", "My experience includes...").
 * Do not make up information.
 * After any available tool runs, generate a final response to the user based on the tool's output.`;
-
+*/
 
 // --- API Route Handler ---
 export async function POST(req: NextRequest) {
     // Environment variables checked at startup
 
     try {
+        // --- Load System Prompt from File ---
+        const systemPromptFilePath = path.join(process.cwd(), '/public/system_prompt.txt');
+        const systemPrompt = await fs.readFile(systemPromptFilePath, 'utf-8');
+        console.log("[API /api/chat] Loaded system prompt from file.");
+
         const body = await req.json();
         const messages: Message[] = body.messages ?? [];
         const currentMessageContent = messages[messages.length - 1]?.content;
@@ -169,7 +177,7 @@ export async function POST(req: NextRequest) {
         // --- Call streamText with Available Tools ---
         const result = await streamText({
             model: openai(chatModelName), // API key read from env
-            system: SYSTEM_PROMPT,
+            system: systemPrompt, // Use the loaded system prompt
             messages,
             temperature: 0.3,
             tools: availableTools, // Pass the conditionally populated tools object
