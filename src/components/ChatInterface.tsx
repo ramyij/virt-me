@@ -18,7 +18,7 @@ export default function ChatInterface() {
   });
 
   return (
-    <div className="flex flex-col h-screen max-h-[90vh] w-full max-w-2xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+    <div className="flex flex-col h-screen max-h-[90vh] w-full max-w-2xl mx-auto bg-[#4b533c] rounded-lg shadow-xl overflow-hidden">
       {/* Message display area */}
       <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
         {messages.length > 0 ? (
@@ -43,7 +43,7 @@ export default function ChatInterface() {
             </div>
           ))
         ) : (
-          <div className="text-center text-gray-500">
+          <div className="text-center text-2xl text-gray-800">
             Start the interview by asking me a question about my professional or personal background!
           </div>
         )}
@@ -71,7 +71,7 @@ export default function ChatInterface() {
           <input
             className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={input}
-            placeholder="Ask me anything about my background..."
+            placeholder="Hi, how are you doing today?"
             onChange={handleInputChange}
             disabled={isLoading} // Disable input while loading
           />

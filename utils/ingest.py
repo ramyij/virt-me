@@ -75,6 +75,176 @@ resume_chunks = [
         page_content="SALES\nMEDDPICC\nValue based selling\nForce Management",
         metadata={"section": "Skills", "category": "Sales"}
     ),
+    # --- Family ---
+    Document(
+    page_content="My family is the center of my life, consisting of my wife and our two young boys - a toddler and an infant. As parents of young children, much of our free time revolves around family-oriented activities that allow us to spend quality time together while fostering our children's development and appreciation for the outdoors.\n\nWe particularly enjoy spending time outside as a family, frequently exploring local hiking trails that are manageable with young children. These outings give us an opportunity to introduce our boys to nature, teach them about plants and animals, and build their physical endurance in an enjoyable way. The trails provide a perfect balance of adventure and accessibility for our family at different stages of development.\n\nWhen we're not hitting the trails, we're often found at local playgrounds where my wife and I have become what we jokingly call 'playground warriors' - experts at spotting the best playground equipment and creating imaginative games to keep our children engaged and active. These playground visits serve as both physical outlets for our energetic toddler and social opportunities for all of us to connect with other local families.\n\nBalancing the demands of parenting two young children while maintaining our other interests and responsibilities is certainly challenging, but the joy of watching our boys discover the world around them makes it all worthwhile.",
+    metadata={
+        "section": "Family", 
+        "category": "Personal Life",
+        "members": ["Wife", "Toddler son", "Infant son"],
+        "activities": ["Hiking", "Outdoor play", "Playground visits"],
+        "life_stage": "Young family"
+        }
+    ),
+
+    # --- Hobbies: Mushroom Foraging ---
+    Document(
+    page_content="Mushroom foraging has developed into one of my most engaging and rewarding hobbies, combining my interests in outdoor exploration, natural science, and culinary experimentation. I spend considerable time in local forests and natural areas searching for and identifying various species of edible mushrooms throughout their respective growing seasons.\n\nMy foraging activities involve careful identification of safe edible species, sustainable harvesting practices to ensure future growth, and meticulous documentation of locations and conditions where specific varieties thrive. I've developed a particular knowledge of local species that appear at different times throughout the year in New Jersey's diverse ecosystems.\n\nAs an active member of the New Jersey Mycological Association, I regularly participate in group forays where knowledge is shared among members ranging from beginners to experts. These organized excursions provide valuable learning opportunities and allow me to connect with others who share this specialized interest. The association also offers identification workshops and educational sessions that have helped me develop confidence in distinguishing edible varieties from potentially dangerous lookalikes.\n\nThe culinary aspect of mushroom foraging is equally important to me. I enjoy experimenting with different preparation methods and recipes specifically designed to highlight the unique flavors and textures of wild-foraged fungi. From simple sautés that preserve the natural essence of chanterelles to more complex dishes incorporating multiple foraged varieties, I continuously explore new ways to incorporate my harvests into memorable meals.\n\nThis hobby connects me deeply with the seasonal rhythms of the local environment and provides a satisfying combination of outdoor activity, scientific learning, social connection, and culinary creativity.",
+    metadata={
+        "section": "Hobbies", 
+        "category": "Mushroom Foraging",
+        "activities": ["Identification", "Harvesting", "Cooking"],
+        "organizations": ["New Jersey Mycological Association"],
+        "locations": ["New Jersey forests"],
+        "related_interests": ["Cooking", "Botany", "Outdoor activities"]
+        }
+    ),
+    # --- Hobbies: Smart Home Technology ---
+    Document(
+    page_content="My smart home hobby represents a significant technical interest and time investment, focused specifically on creating a privacy-conscious and locally-controlled home automation system. Unlike mainstream consumer approaches that rely heavily on cloud services, I've deliberately built a system that operates entirely on my local network without external dependencies.\n\nAt the core of my setup is the Home Assistant ecosystem, which serves as the central hub for integrating various devices and automation workflows. This open-source platform allows me to maintain complete control over my data while avoiding the subscription costs and potential privacy concerns associated with cloud-based alternatives. I've configured Home Assistant to manage everything from lighting and climate control to security monitoring and entertainment systems.\n\nOne of my most technically advanced projects has been implementing a voice command system using a locally-hosted LLaMA model. This runs on a dedicated desktop computer equipped with a discrete GPU that provides the necessary processing power. The system converts spoken commands into actions within my home without sending any audio data to external servers, maintaining complete privacy while still offering convenient voice control functionality.\n\nI frequently work with ESP8266 microcontrollers to create custom sensors and control modules that integrate with my system. This often involves light soldering work and custom firmware development to 'hack' commercial products that would otherwise require cloud connectivity. These modifications ensure that all devices operate fully within my local network architecture.\n\nBeyond the practical benefits of privacy and cost savings, this hobby satisfies my technical curiosity and desire for complete understanding of the systems I use daily. Each component represents a small project in itself, from hardware modifications to software configuration and integration challenges.",
+    metadata={
+        "section": "Hobbies", 
+        "category": "Smart Home Technology",
+        "focus": ["Privacy", "Local networking", "DIY hardware"],
+        "technologies": ["Home Assistant", "LLaMA", "ESP8266"],
+        "skills": ["Soldering", "Hardware hacking", "System integration", "Local hosting"],
+        "motivations": ["Privacy concerns", "Cost reduction", "Technical control"]
+        }
+    ),
+# --- Hobbies: Photography ---
+Document(
+    page_content="Photography has been a passionate hobby of mine for many years, with a particular focus on three distinct subject areas: landscapes, neighborhood wildlife, and mushroom macrophotography.\n\nIn landscape photography, I've had the privilege of capturing the dramatic coastal scenes of Acadia National Park in Maine, with its rocky shorelines and striking sunrises over the Atlantic. I've also photographed the majestic mountain vistas and alpine lakes of Glacier National Park in Montana. Most recently, I've documented the otherworldly desert landscapes of Joshua Tree National Park in California, focusing on the unique Joshua trees against stunning sunset skies and the fascinating rock formations throughout the park.\n\nCloser to home, I've developed an eye for local wildlife photography, patiently documenting the birds, squirrels, rabbits, and occasional foxes that inhabit my neighborhood. This practice has taught me the value of patience and quick reflexes to capture fleeting natural moments.\n\nMy most specialized photography interest lies in macro photography of mushrooms and fungi. I'm fascinated by capturing the intricate details, textures, and colors of various mushroom species. This niche has led me to explore local forests during the damper seasons, carefully documenting the ephemeral fungi that emerge after rainfall. My macro equipment allows me to reveal the hidden details of these often-overlooked natural marvels.\n\nFor all my photographic work, I use a Sony a6000 crop sensor camera paired with a collection of E-mount prime lenses. My lens arsenal includes an 18mm for wide landscape vistas, a 24mm for general purpose shooting, a 50mm that excels at neighborhood wildlife, and a 105mm that's perfect for detailed macro work with mushrooms and fungi. This versatile yet compact setup allows me to capture everything from sweeping national park landscapes to the minute details of forest floor mushrooms.",
+    metadata={
+        "section": "Hobbies", 
+        "category": "Photography", 
+        "subjects": ["Landscapes", "Wildlife", "Macro", "Mushrooms"],
+        "locations": ["Acadia National Park", "Glacier National Park", "Joshua Tree National Park", "Neighborhood"],
+        "equipment_type": "Sony a6000 crop sensor with E-mount prime lenses (18mm, 24mm, 50mm, 105mm)",
+        "experience_level": "Enthusiast"
+        }
+    ),
+    # --- Contact Information (Alternative) ---
+Document(
+    page_content="Ramy Jaber\nNew Jersey resident\nContact: ramyij@pm.me | 732.567.2603\nProfessional profile: linkedin.com/in/ramyj",
+    metadata={"section": "Contact"}
+),
+
+# --- Experience: Intel (Alternative) ---
+Document(
+    page_content="Since October 2022, I've been working at Intel in a remote capacity from my home in New Jersey. I initially joined as Manager of Cloud Solution Architects for Performance Engineering at Granulate.io (following Intel's acquisition) and later transitioned to the role of Cloud Solution Architect specializing in Large Language Models.\n\nIn my LLM-focused position, I was instrumental in the technical implementation of a significant partnership with SeekrFlow's Enterprise LLM platform (seekr.com), valued at $70 million over 3 years. My contributions included creating Python demonstration notebooks, developing technical sales collateral, and conducting training sessions for both sales representatives and solutions teams. These efforts yielded impressive results within just three months: 7 enterprise customer engagements initiated and two Proofs of Value (POVs) secured.\n\nMy responsibilities also encompassed end-to-end technical pre-sales management, from initial customer discussions through to the technical proof-of-concept stage. A critical component of this work involved helping customers transition their existing CUDA-based LLM implementations to Intel's Gaudi hardware platform. This required ensuring seamless functionality, conducting detailed performance analysis, and implementing optimizations where needed. My effectiveness in this area is reflected in our success rate: 5 successful technical wins out of 6 completed POCs, contributing approximately $8 million in revenue generation across a 9-month timeframe.\n\nI've also established strong working relationships with emerging AI companies including Stability AI, Character.ai, and Pathway. My collaboration with these organizations involved designing customized LLM solutions, facilitating their technical transition to Gaudi architecture, and achieving technical success across multiple proof-of-concept implementations.\n\nBefore my LLM specialization, I served as Manager for Performance Engineering at Granulate.io prior to its acquisition by Intel. In this capacity, I led a team of 4 Solution Engineers responsible for a $7 million ARR portfolio. I functioned as the primary escalation point for major customer technical challenges and strategically allocated limited research resources to maximize business outcomes.\n\nA particularly notable achievement was successfully managing the emergency response during a significant production outage affecting our largest client. We reduced performance degradation within 25 minutes, and I subsequently directed the comprehensive root cause investigation that proved essential in rebuilding customer confidence.\n\nI also focused on expanding startup customer relationships. With Nylas, I grew their account from $200K to $800K ARR over a two-year period. For iFood, a prominent Brazilian food delivery service, I guided their engagement from initial contact to a $1.1 million implementation through progressive adoption of our Databricks and Kubernetes optimization offerings.\n\nAnother significant contribution was my development of Python-based automation tools that substantially increased our customer onboarding capacity from 20 workloads daily to 300. This automation typically generated compute cost savings of approximately 40% for our customers.",
+    metadata={"section": "Experience", "company": "Intel", "roles": ["Cloud Solution Architect - LLMs", "Manager, Cloud Solution Architect - Performance Engineering"], "location": "Remote, NJ", "dates": "Oct 2022 - Present"}
+),
+
+# --- Experience: DataRobot (Alternative) ---
+Document(
+    page_content="I was employed at DataRobot as a Pre-sales Data Scientist from July 2021 until October 2022, working remotely from my base in New Jersey.\n\nDuring my tenure, I spearheaded technical presales initiatives for clients across multiple industries including Financial Services, Retail, and Telecommunications throughout the NYC region. A core aspect of my role involved creating and delivering customized demonstrations aligned with specific client requirements. A particularly successful example was my development of an innovative credit rating prediction solution specifically designed for private business lending, which generated three additional proof-of-concept engagements.\n\nOne of my key accomplishments was successfully preventing potential revenue loss of $2 million. I achieved this by proactively identifying and developing new use cases for DataRobot's platform across multiple departments within an existing client organization, including creating an innovative automation solution focused on model compliance documentation.",
+    metadata={"section": "Experience", "company": "DataRobot", "roles": ["Pre-sales Data Scientist"], "location": "Remote, NJ", "dates": "Jul 2021 - Oct 2022"}
+),
+
+# --- Experience: Udacity (Alternative) ---
+Document(
+    page_content="Between February 2019 and April 2021, I worked with Udacity in a remote capacity from New York. During this period, I progressed from Senior Solution Architect to Director of Solution Architects for Global Enterprise.\n\nIn my capacity as Director, I established the Solutions Architecture team from inception. Throughout an 18-month period, I recruited and supervised a team consisting of 10 Solution Architects, overseeing all aspects from conducting performance assessments to providing professional development guidance. Throughout my leadership, the team consistently surpassed revenue expectations: delivering $13M (exceeding quota by 1.7x) in the first year, $33M (exceeding quota by 1.8x) in the second year, with projections of $40M (exceeding quota by 1.1x) for the third year.\n\nA significant project under my leadership was creating an enterprise-wide skills transformation initiative for a major consultancy within the Big 4. This comprehensive undertaking involved curriculum design and development of specialized projects aimed at enhancing data analytics capabilities for more than 400 employees.\n\nI also led the creation of a detailed sales methodology working collaboratively with Force Management. This encompassed defining critical components such as Value Messaging frameworks and MEDDPICC sales processes, alongside standardizing various sales stages, resulting in more uniform performance across geographic regions.\n\nDuring my initial position as Senior Solution Architect at Udacity, I was the inaugural pre-sales technical specialist integrated into their expanding Enterprise Sales division. I essentially pioneered the Solution Architect function within the organization and personally contributed to $13 million in sales revenue throughout 2019.\n\nI played a crucial role in growing revenue from a strategic account (Shell Oil & Gas) by $2.1 million through developing robust executive-level relationships and serving as their dedicated technical advisor.\n\nI also regularly shared technical knowledge across Data Science, AI/ML, and Cloud domains by delivering monthly in-depth content presentations and facilitation sessions for broader team education.",
+    metadata={"section": "Experience", "company": "Udacity", "roles": ["Director, Solution Architects - Global Enterprise", "Senior Solution Architect"], "location": "Remote, NY", "dates": "Feb 2019 - Apr 2021"}
+),
+
+# --- Experience: Appian Corporation (Alternative) ---
+Document(
+    page_content="From February 2015 to July 2017, I was employed at Appian Corporation in Reston, Virginia. During this time, I advanced through several positions, beginning as a Solution Engineer, then progressing to Senior Solution Engineer, and ultimately reaching the position of Lead Solution Engineer.\n\nAs a Lead Solution Engineer, I was among three team leaders tasked with guiding the substantial expansion of our department, which grew from 8 to 29 team members. My specific leadership responsibilities included directly managing 3 engineers, conducting their performance reviews, and developing their professional advancement plans.\n\nOne of my significant contributions was leading a project team dedicated to analyzing performance metrics across approximately 600 different installations. Within this initiative, I created Python scripts designed to process monitoring alerts. These tools effectively reduced the overwhelming volume of several hundred hourly notification emails by roughly 85%, significantly improving the usability of the alert system.\n\nAnother important aspect of my role involved close collaboration with the Product Development team. By conducting thorough analysis of performance log data and providing specific action recommendations, I contributed to the resolution of several critical software defects.",
+    metadata={"section": "Experience", "company": "Appian Corporation", "roles": ["Lead Solution Engineer", "Senior Solution Engineer", "Solution Engineer"], "location": "Reston, VA", "dates": "Feb 2015 - Jul 2017"}
+),
+
+# --- Education: Columbia (Alternative) ---
+Document(
+    page_content="ACADEMIC CREDENTIALS\nColumbia University, New York, NY\nMS, Data Science\nGraduated: December 2018",
+    metadata={"section": "Education", "institution": "Columbia University", "degree": "Masters of Science in Data Science", "graduation_date": "December 2018", "location": "New York, NY"}
+),
+
+# --- Education: Stevens (Alternative) ---
+Document(
+    page_content="Stevens Institute of Technology, Hoboken, NJ\nBE in Engineering Management, May 2012\nAdditional Concentrations: Economics, Pure and Applied Mathematics",
+    metadata={"section": "Education", "institution": "Stevens Institute of Technology", "degree": "Bachelors of Engineering in Engineering Management", "minors": ["Economics", "Pure and Applied Mathematics"], "graduation_date": "May 2012", "location": "Hoboken, NJ"}
+),
+
+# --- Skills: Leadership & Strategy (Alternative) ---
+Document(
+    page_content="PROFESSIONAL COMPETENCIES\nSTRATEGIC LEADERSHIP\nC-Suite Relationship Building\nTechnical Team Leadership\nSales Training & Knowledge Transfer\nEnterprise Client Strategy Development\nMulti-departmental Collaboration",
+    metadata={"section": "Skills", "category": "Leadership & Strategy"}
+),
+
+# --- Skills: Data Science / ML / Gen AI (Alternative) ---
+Document(
+    page_content="ARTIFICIAL INTELLIGENCE & DATA SCIENCE\nPyTorch Framework Implementation\nTransformer Architecture\nModel Evaluation & Benchmarking\nPerformance Optimization for Inference\nHardware Infrastructure Assessment\nProduction Model Deployment\nEfficient Model Serving (vLLM)",
+    metadata={"section": "Skills", "category": "Data Science / ML / Gen AI"}
+),
+
+# --- Skills: Cloud Administration (Alternative) ---
+Document(
+    page_content="CLOUD PLATFORM EXPERTISE\nBig Data Processing - Databricks, AWS EMR, Google Dataproc\nCore Infrastructure - Virtual Machines, Storage Solutions, Serverless Computing\nContainer Orchestration with Kubernetes",
+    metadata={"section": "Skills", "category": "Cloud Administration"}
+),
+
+# --- Skills: Solution Architecture (Alternative) ---
+Document(
+    page_content="TECHNICAL SOLUTION DEVELOPMENT\nProduct Demonstrations & Showcases\nBusiness Use Case Discovery\nProof of Value Implementation\nProduct Enhancement Recommendations",
+    metadata={"section": "Skills", "category": "Solution Architecture"}
+),
+
+# --- Skills: Sales (Alternative) ---
+Document(
+    page_content="REVENUE GENERATION\nMEDDPICC Sales Methodology\nValue-oriented Selling Approach\nForce Management Principles",
+    metadata={"section": "Skills", "category": "Sales"}
+),
+
+# --- Family (Alternative) ---
+Document(
+    page_content="At the heart of my personal life is my growing family - my wife and I are raising two young children, a toddler and a baby. The dynamics of parenting young kids shapes much of how we spend our non-working hours, with a focus on activities that combine quality family time with developmental experiences that foster our children's connection to the natural world.\n\nOur family regularly explores hiking paths in our area that are suitable for children at different developmental stages. These adventures serve multiple purposes - they allow us to introduce environmental awareness to our boys, teach them to identify various plants and wildlife, and help them build stamina in an enjoyable context. We carefully select trails that offer the right balance of exploration opportunities while remaining manageable for small children.\n\nBetween our hiking excursions, we frequently visit neighborhood playgrounds where we've become skilled at maximizing the play value of different equipment types. We create engaging activities that keep our children - particularly our energetic toddler - physically active while developing their social skills. These playground outings not only provide essential physical outlets but also create opportunities to connect with other families in our community.\n\nJuggling the responsibilities of raising two young children while maintaining our own personal interests and career obligations presents daily challenges, but witnessing our sons' excitement as they explore and discover their surroundings makes these challenges worthwhile.",
+    metadata={
+        "section": "Family", 
+        "category": "Personal Life",
+        "members": ["Wife", "Toddler son", "Infant son"],
+        "activities": ["Hiking", "Outdoor play", "Playground visits"],
+        "life_stage": "Young family"
+    }
+),
+
+# --- Hobbies: Mushroom Foraging (Alternative) ---
+Document(
+    page_content="Wild mushroom foraging has evolved into a passion that perfectly combines my interests in wilderness exploration, natural history, and experimental cooking. Throughout the various growing seasons, I dedicate significant time to exploring New Jersey's woodlands and natural areas in search of edible fungal species.\n\nMy approach to foraging encompasses several key practices: careful species identification with safety as the primary concern, responsible harvesting techniques that preserve future growth, and detailed recording of locations and environmental conditions that favor specific varieties. Over time, I've gained specialized knowledge about local mushroom species that appear seasonally throughout New Jersey's diverse ecological zones.\n\nMy active participation in the New Jersey Mycological Association provides valuable community connections through organized group foraging expeditions that bring together enthusiasts with varying experience levels. These collective outings offer rich learning experiences and connections with fellow foragers. The association's workshops and educational programs have been instrumental in developing my ability to confidently distinguish edible species from potentially harmful lookalikes.\n\nThe culinary dimension of mushroom foraging is equally compelling for me. I take pleasure in testing various cooking approaches and recipes specifically created to showcase the distinct flavors and textures of wild mushrooms. My culinary experiments range from minimalist preparations that highlight chanterelles' natural qualities to more elaborate dishes that incorporate multiple foraged varieties, constantly exploring innovative ways to feature these seasonal harvests in memorable dining experiences.\n\nThis hobby creates a profound connection to the seasonal patterns of my local environment while offering a fulfilling blend of outdoor activity, scientific learning, community engagement, and creative cooking.",
+    metadata={
+        "section": "Hobbies", 
+        "category": "Mushroom Foraging",
+        "activities": ["Identification", "Harvesting", "Cooking"],
+        "organizations": ["New Jersey Mycological Association"],
+        "locations": ["New Jersey forests"],
+        "related_interests": ["Cooking", "Botany", "Outdoor activities"]
+    }
+),
+
+# --- Hobbies: Smart Home Technology (Alternative) ---
+Document(
+    page_content="I devote considerable time and technical effort to my smart home project, with a specific emphasis on building a privacy-focused home automation ecosystem that operates independently of cloud services. Unlike conventional consumer smart home setups that heavily rely on external servers, I've intentionally designed my system to function exclusively within my local network infrastructure.\n\nThe foundation of my implementation is built on Home Assistant, which functions as the integration hub for my diverse collection of devices and automation routines. This open-source solution provides complete data sovereignty while eliminating subscription fees and addressing privacy concerns associated with cloud-dependent alternatives. My Home Assistant configuration manages numerous household systems including illumination control, temperature regulation, security monitoring, and media distribution.\n\nA particularly sophisticated component of my setup is a voice control system powered by a locally-running LLaMA language model. This operates on a dedicated computer with specialized graphics processing hardware providing the necessary computational resources. This arrangement enables voice-activated home control without transmitting audio recordings to external servers, preserving privacy while maintaining convenient hands-free functionality.\n\nI regularly incorporate ESP8266 microcontrollers into my system to create purpose-built sensors and control interfaces. This process frequently involves electronics work including soldering and custom firmware development to modify commercial products that would typically require cloud connectivity. These technical modifications ensure that all components operate exclusively within my secured local network.\n\nBeyond the practical advantages of enhanced privacy and reduced ongoing costs, this technical pursuit satisfies my innate curiosity and desire for comprehensive understanding of my daily technology environment. Each system element represents an individual technical challenge spanning hardware customization, software configuration, and integration problem-solving.",
+    metadata={
+        "section": "Hobbies", 
+        "category": "Smart Home Technology",
+        "focus": ["Privacy", "Local networking", "DIY hardware"],
+        "technologies": ["Home Assistant", "LLaMA", "ESP8266"],
+        "skills": ["Soldering", "Hardware hacking", "System integration", "Local hosting"],
+        "motivations": ["Privacy concerns", "Cost reduction", "Technical control"]
+    }
+),
+
+# --- Hobbies: Photography (Alternative) ---
+Document(
+    page_content="I've cultivated a deep interest in photography over many years, concentrating primarily on three distinct subject categories: natural landscapes, local wildlife, and close-up fungi photography.\n\nMy landscape photography portfolio includes captures from several iconic national parks. At Acadia in Maine, I've documented the dramatic coastline with its granite formations and Atlantic sunrise vistas. In Montana's Glacier National Park, I've focused on capturing alpine scenery with its pristine lakes and mountain panoramas. My more recent work in Joshua Tree National Park features the distinctive desert environment with its characteristic yucca-like trees silhouetted against vibrant sunset skies and the park's remarkable geological formations.\n\nWithin my immediate surroundings, I've developed techniques for photographing the diverse wildlife that inhabits my neighborhood ecosystem. This practice has enhanced my skills in patient observation and quick response timing to document fleeting moments as birds, squirrels, rabbits, and occasional foxes go about their daily activities.\n\nMy most technically specialized photographic interest involves macro imagery of mushrooms and fungi species. The intricate structures, surface textures, and varied coloration of different fungal specimens provide fascinating subjects for close-up documentation. This specialized focus has led me to explore wooded areas during periods of high moisture, documenting the temporary fungal growths that appear following rainfall events. My specialized macro equipment reveals minute details invisible to casual observation of these often-overlooked natural subjects.\n\nFor all these photographic pursuits, I employ a Sony a6000 camera with APS-C sensor complemented by a selection of fixed focal length E-mount lenses. My lens collection includes: an 18mm optic for expansive landscape compositions, a versatile 24mm for general photography, a 50mm lens particularly effective for wildlife subjects, and a 105mm that excels at detailed macro work with fungi specimens. This adaptable yet relatively compact equipment configuration enables me to capture subjects ranging from vast landscape perspectives to microscopic mushroom details.",
+    metadata={
+        "section": "Hobbies", 
+        "category": "Photography", 
+        "subjects": ["Landscapes", "Wildlife", "Macro", "Mushrooms"],
+        "locations": ["Acadia National Park", "Glacier National Park", "Joshua Tree National Park", "Neighborhood"],
+        "equipment_type": "Sony a6000 crop sensor with E-mount prime lenses (18mm, 24mm, 50mm, 105mm)",
+        "experience_level": "Enthusiast"
+    }
+)
 ]
 # =================== END: Define Resume Chunks ===================
 
