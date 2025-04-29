@@ -71,7 +71,7 @@ export default function ChatInterface() {
       <div className="border-t border-gray-200 p-4 bg-white">
         <form onSubmit={handleSubmit} className="flex items-center space-x-2">
           <input
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
             value={input}
             placeholder="Hi, how are you doing today?"
             onChange={handleInputChange}
