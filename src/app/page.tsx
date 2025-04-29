@@ -89,7 +89,7 @@ export default function HomePage() {
             <img
               src={HEADSHOT_IMAGE_URL}
               alt="Ramy Jaber Headshot"
-              className="w-96 h-96 md:w-112 md:h-112 rounded-full border-4 border-gray-400 shadow-lg object-cover"
+              className="w-72 h-72 md:w-96 md:h-96 rounded-full border-4 border-gray-400 shadow-lg object-cover"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.onerror = null; // Prevent infinite loop
@@ -100,8 +100,8 @@ export default function HomePage() {
 
           {/* Text Block (Overlaps Headshot on md+) */}
           <div className="relative z-10 bg-gray-800/90 text-white py-4 px-6 md:py-6 md:px-8 rounded-lg shadow-xl flex-grow text-center md:text-left md:mt-20">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Ramy Jaber</h1>
-            <p className="text-base md:text-lg mb-6 text-gray-200 leading-relaxed">
+            <h1 className="text-xl md:text-xl font-bold mb-4">Ramy Jaber</h1>
+            <p className="text-base md:text-md mb-6 text-gray-200 leading-relaxed">
               {/* Replace with your actual blurb */}
               Cloud Solution Architect specializing in Large Language Models (LLMs) and performance engineering. Experienced in technical pre-sales, GTM strategy, team leadership, and driving significant business growth through innovative AI solutions. Passionate about bridging the gap between complex technology and real-world business value.
             </p>
@@ -130,7 +130,7 @@ export default function HomePage() {
 
           {/* Resume Button + Icon (Formerly Career) */}
           <div className="flex flex-col items-center">
-            <img src="/images/icon-career.svg" alt="Resume Icon" className="w-24 h-24 mb-14 mt-10 ml-20 mr-25" />
+            <img src="/images/icon-resume.svg" alt="Resume Icon" className="w-24 h-24 mb-14 mt-10 ml-20 mr-25" />
             <Button href="/resume" variant="secondary">
               Resume
             </Button>
