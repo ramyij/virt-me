@@ -3,6 +3,7 @@ import React from 'react';
 import './globals.css'; // Make sure you have a global CSS file for base styles/Tailwind imports
 import Link from 'next/link'; // Use Next.js Link for client-side navigation
 import { Inter } from 'next/font/google'; // Import the Inter font
+import { Analytics } from "@vercel/analytics/react"
 
 // Instantiate the font
 const inter = Inter({ subsets: ['latin'] });
