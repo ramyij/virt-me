@@ -16,8 +16,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: React.FC<ButtonProps> = ({ children, className, variant = 'primary', href, icon, ...props }) => {
-  const baseStyle = "inline-block px-6 py-2 rounded-full font-semibold transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md text-center";
-  const primaryStyle = "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500";
+  const baseStyle = "inline-block px-6 py-2 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md text-center";
+  const primaryStyle = "text-white hover:bg-[#4f8f24] hover:font-semibold focus:ring-green-300";
   const secondaryStyle = "bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-400";
 
   const combinedClassName = `${baseStyle} inline-flex items-center ${variant === 'primary' ? primaryStyle : secondaryStyle} ${className}`;
@@ -99,11 +99,13 @@ export default function HomePage() {
           </div>
 
           {/* Text Block (Overlaps Headshot on md+) */}
-          <div className="relative z-10 bg-gray-800/90 text-white py-4 px-6 md:py-6 md:px-8 rounded-lg shadow-xl flex-grow text-center md:text-left md:mt-20">
+          <div className="relative z-10 bg-[#353b2b]/90 text-white py-4 px-6 md:py-6 md:px-8 rounded-lg shadow-xl flex-grow text-center md:text-left md:mt-20">
             <h1 className="text-xl md:text-xl font-bold mb-4">Ramy Jaber</h1>
             <p className="text-base md:text-md mb-6 text-gray-200 leading-relaxed">
-              {/* Replace with your actual blurb */}
-              Cloud Solution Architect specializing in Large Language Models (LLMs) and performance engineering. Experienced in technical pre-sales, GTM strategy, team leadership, and driving significant business growth through innovative AI solutions. Passionate about bridging the gap between complex technology and real-world business value.
+              I help businesses solve real-world challenges by applying the right cutting-edge AI – from predictive ML models yesterday to LLMs today, and whatever comes next. I thrive on bridging my intense focus on technology with building go-to-market strategies for these technical innovations, translating complex capabilities into clear value. When I'm offline, you'll find me outdoors, camera in hand, documenting hiking trails, wildlife, and foraging discoveries.
+              <br />
+              <br />
+               Want to learn more about me? <Link href="/chat" className="text-blue-300 hover:text-blue-400 underline"> Interview my Virtual Me!</Link>
             </p>
           </div>
         </div>
@@ -114,7 +116,9 @@ export default function HomePage() {
 
           {/* Chat Button + Icon */}
           <div className="flex flex-col items-center">
-            <img src="/images/icon-chat.svg" alt="Interview Me Icon" className="w-48 h-48 mb-2" /> {/* Placeholder Icon */}
+            <Link href="/chat">
+              <img src="/images/icon-chat.svg" alt="Interview Me Icon" className="w-48 h-48 mb-2" /> {/* Placeholder Icon */}
+            </Link>
             <Button href="/chat" variant="primary">
               Interview Me (AI Chat)
             </Button>
@@ -122,16 +126,20 @@ export default function HomePage() {
 
           {/* Photography Button + Icon */}
           <div className="flex flex-col items-center">
-            <img src="/images/icon-personal.svg" alt="Photography Icon" className="w-24 h-24 mb-16 mt-10 ml-20 mr-25" /> {/* Placeholder Icon */}
-            <Button href="https://photos.ramyjaber.com" variant="secondary">
+            <Link href="https://photos.ramyjaber.com" target="_blank" rel="noopener noreferrer">
+              <img src="/images/icon-personal.svg" alt="Photography Icon" className="w-24 h-24 mb-16 mt-10 ml-20 mr-25" /> {/* Placeholder Icon */}
+            </Link>
+            <Button href="https://photos.ramyjaber.com" variant="primary">
               Photography
             </Button>
           </div>
 
           {/* Resume Button + Icon (Formerly Career) */}
           <div className="flex flex-col items-center">
-            <img src="/images/icon-resume.svg" alt="Resume Icon" className="w-24 h-24 mb-14 mt-10 ml-20 mr-25" />
-            <Button href="/resume" variant="secondary">
+            <Link href="/resume">
+              <img src="/images/icon-resume.svg" alt="Resume Icon" className="w-24 h-24 mb-14 mt-10 ml-20 mr-25" />
+            </Link>
+            <Button href="/resume" variant="primary">
               Resume
             </Button>
           </div>

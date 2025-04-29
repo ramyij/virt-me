@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] });
 const Navbar: React.FC = () => {
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'Chat', href: '/chat' },
+    { name: 'Interview Me', href: '/chat' },
     { name: 'Photography', href: 'https://photos.ramyjaber.com' },
     { name: 'Resume', href: '/resume' },
   ];
@@ -70,11 +70,13 @@ const Navbar: React.FC = () => {
           <div className="flex items-center space-x-4">
             <a href="https://linkedin.com/in/ramyj" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
               {/* Replace with LinkedIn Icon SVG or Component */}
-              <span className="text-sm">LinkedIn</span>
+              <img src="/images/icon-linkedin.svg" alt="LinkedIn Icon" className="w-8 h-8 mb-2" /> {/* Placeholder Icon */}
+              <span className="sr-only">LinkedIn</span>
             </a>
             <a href="https://github.com/ramyij" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
               {/* Replace with GitHub Icon SVG or Component */}
-              <span className="text-sm">GitHub</span>
+              <img src="/images/icon-github.svg" alt="GitHub Icon" className="w-8 h-8 mb-2" /> {/* Placeholder Icon */}
+              <span className="sr-only">GitHub</span>
             </a>
           </div>
 
