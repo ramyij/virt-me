@@ -102,7 +102,7 @@ export default function HomePage() {
           <div className="relative z-10 bg-[#353b2b]/90 text-white py-4 px-6 md:py-6 md:px-8 rounded-lg shadow-xl flex-grow text-center md:text-left md:mt-20">
             <h1 className="text-xl md:text-xl font-bold mb-4">Ramy Jaber</h1>
             <p className="text-base md:text-md mb-6 text-gray-200 leading-relaxed">
-              I help businesses solve real-world challenges by applying the right cutting-edge AI – from predictive ML models yesterday to LLMs today, and whatever comes next. I thrive on bridging my intense focus on technology with building go-to-market strategies for these technical innovations, translating complex capabilities into clear value. When I'm offline, you'll find me outdoors, camera in hand, documenting hiking trails, wildlife, and foraging discoveries.
+              I help businesses solve real-world challenges by applying the right cutting-edge AI – from predictive ML models yesterday to LLMs today, and whatever comes next. I thrive on bridging my intense focus on technology with building go-to-market strategies for these technical innovations, translating complex capabilities into clear value. When I&apos;m offline, you&apos;ll find me outdoors, camera in hand, documenting hiking trails, wildlife, and foraging discoveries.
               <br />
               <br />
                Want to learn more about me? <Link href="/chat" className="text-blue-300 hover:text-blue-400 underline"> Interview my Virtual Me!</Link>
