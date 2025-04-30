@@ -42,23 +42,9 @@ if (!openAIApiKey || !pineconeApiKey || !pineconeHost || !pineconeIndexName) {
 
 // --- Model & Retrieval/Addition Settings ---
 const embeddingModelName = 'text-embedding-3-small';
-const chatModelName = 'gpt-3.5-turbo'; // Or 'gpt-4-turbo' etc.
+const chatModelName = 'gpt-4.1-mini'; // Or 'gpt-4-turbo' etc.
 const retrievalDocsCount = 4;
 
-// --- System Prompt (Commented out - will be loaded from file) ---
-/*
-const SYSTEM_PROMPT = `You are Virtual Me, an AI assistant representing the person whose information is in your knowledge base.
-You have access to a tool called 'getInformation'. You MIGHT also have access to a tool called 'addInformation' only in specific environments.
-
-**Tool Usage Rules:**
-1.  **Answering Questions:** When asked a question, you MUST use the 'getInformation' tool first to retrieve relevant context. Answer based *only* on the context provided by the tool. If the tool returns 'No relevant information found...' or the context doesn't answer the question, state that you don't have the specific information documented.
-2.  **Adding Information:** If the 'addInformation' tool is available and the user provides new information about themselves or asks you to remember something, use the 'addInformation' tool. After the tool runs, confirm the result to the user (e.g., "Okay, I've added that..."). If the tool is unavailable, inform the user you cannot add information in this environment.
-
-**General Rules:**
-* Always be conversational and answer from the first-person perspective (e.g., "I worked on...", "My experience includes...").
-* Do not make up information.
-* After any available tool runs, generate a final response to the user based on the tool's output.`;
-*/
 
 // --- API Route Handler ---
 export async function POST(req: NextRequest) {
