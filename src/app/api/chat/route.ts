@@ -42,7 +42,7 @@ if (!openAIApiKey || !pineconeApiKey || !pineconeHost || !pineconeIndexName) {
 
 // --- Model & Retrieval/Addition Settings ---
 const embeddingModelName = 'text-embedding-3-small';
-const chatModelName = 'gpt-4.1-mini'; // Or 'gpt-4-turbo' etc.
+const chatModelName = 'gpt-4.1'; // Or 'gpt-4-turbo' etc.
 const retrievalDocsCount = 4;
 
 

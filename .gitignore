@@ -42,4 +42,4 @@ next-env.d.ts
 
 #data
 /data
-/utils/ingest.py
+/utils/resume_data.py
