@@ -113,6 +113,7 @@ export default function RootLayout({
         {/* Page content will be rendered here */}
         <main>{children}</main>
         {/* You can add a Footer component here if needed */}
+        <Analytics />
       </body>
     </html>
   );
