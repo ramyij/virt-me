@@ -9,7 +9,7 @@ import React from 'react';
 export default function ChatPage() {
   return (
     <div className="p-10 md:p-10 max-w-full mx-auto bg-[#4b533c] min-h-screen flex flex-col">
-      {/* <ChatInterface /> */}
+      <ChatInterface />
       {/* Footer */}
       <footer style={{ marginTop: 'auto', textAlign: 'center', fontSize: '0.9rem', color: 'white' }}>
         <p>
