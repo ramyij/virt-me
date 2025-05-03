@@ -8,9 +8,22 @@ import React from 'react';
 
 export default function ChatPage() {
   return (
-    // Add padding and max-width for consistent layout, adjust as needed
-    <div className="p-10 md:p-10 max-w-full mx-auto bg-[#4b533c]">
-      <ChatInterface />
+    <div className="p-10 md:p-10 max-w-full mx-auto bg-[#4b533c] min-h-screen flex flex-col">
+      {/* <ChatInterface /> */}
+      {/* Footer */}
+      <footer style={{ marginTop: 'auto', textAlign: 'center', fontSize: '0.9rem', color: 'white' }}>
+        <p>
+          Check out the project on {''}
+          <a
+            href="https://www.github.com/ramyj"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'white', textDecoration: 'underline' }}
+          >
+            GitHub
+          </a>.
+        </p>
+      </footer>
     </div>
   );
 }

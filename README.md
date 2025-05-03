@@ -1,15 +1,17 @@
 # Virt-Me
 
-A personalized AI assistant application built with Next.js and the Vercel AI SDK that leverages retrieval-augmented generation (RAG) to provide contextually relevant responses based on your knowledge base.
+Virt-Me is a personalized AI assistant application built with Next.js and the Vercel AI SDK. It leverages retrieval-augmented generation (RAG) to provide contextually relevant responses based on your knowledge base. This project demonstrates how AI can be seamlessly integrated into modern web applications to deliver intelligent and interactive user experiences.
 
 ## Features
 
-- **AI Chat Interface**: Interact with an AI assistant powered by OpenAI's GPT-4.1
-- **Knowledge Retrieval**: Automatically retrieves relevant information from your vector database
-- **Memory Management**: Add new information to your knowledge base (in development mode)
-- **Vector Database**: Uses Pinecone for efficient similarity search and storage
+- **AI Chat Interface**: Interact with an AI assistant powered by OpenAI's GPT-4.1.
+- **Knowledge Retrieval**: Automatically retrieves relevant information from your vector database.
+- **Memory Management**: Add new information to your knowledge base (in development mode).
+- **Vector Database**: Uses Pinecone for efficient similarity search and storage.
 
 ## Prerequisites
+
+Before you begin, ensure you have the following:
 
 - Node.js (v18 or higher recommended)
 - [pnpm](https://pnpm.io/installation) package manager
@@ -18,43 +20,60 @@ A personalized AI assistant application built with Next.js and the Vercel AI SDK
 
 ## Installation
 
+Follow these steps to set up the project:
+
 1. Clone the repository:
    ```bash
-   git clone <your-repo-url>
+   git clone www.github.com/ramyij/virt-me
    cd virt-me
    ```
 
-## Getting Started
+2. Install dependencies using `pnpm`:
+   ```bash
+   pnpm install
+   ```
 
-First, run the development server:
+3. Create a `.env.local` file in the root directory and add the following environment variables:
+   ```env
+   OPENAI_API_KEY=<your-openai-api-key>
+   PINECONE_API_KEY=<your-pinecone-api-key>
+   PINECONE_ENVIRONMENT=<your-pinecone-environment>
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+4. Set up your Pinecone index:
+   - Log in to your Pinecone account.
+   - Create a new index with the desired configuration (e.g., dimensions matching your embeddings model).
+   - Update the `.env.local` file with the index name:
+     ```env
+     PINECONE_INDEX=<your-pinecone-index-name>
+     ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Start the development server:
+   ```bash
+   pnpm dev
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+6. Open your browser and navigate to `http://localhost:3000` to access the application.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+To deploy the application, follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
+1. Push your code to a GitHub repository.
+2. Connect your repository to Vercel.
+3. Add the same environment variables from `.env.local` to your Vercel project settings.
+4. Deploy the application directly from Vercel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Interact with the AI assistant through the chat interface.
+- Add new knowledge to the database in development mode.
+- Customize the application by modifying the components and API routes.
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions are welcome! Feel free to submit issues or pull requests to improve the project.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
