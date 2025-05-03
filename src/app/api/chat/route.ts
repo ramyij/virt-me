@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
 
     try {
         // --- Load System Prompt from File ---
-        const systemPromptFilePath = path.join(process.cwd(), '/public/system_prompt.txt');
+        const systemPromptFilePath = path.join(process.cwd(), '/system_prompt.txt');
         const systemPrompt = await fs.readFile(systemPromptFilePath, 'utf-8');
         console.log("[API /api/chat] Loaded system prompt from file.");
 

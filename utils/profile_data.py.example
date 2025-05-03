@@ -1,0 +1,12 @@
+from langchain_core.documents import Document
+
+# This is an example file showing how to structure your profile data
+# Replace with your own information and add more Document chunks as needed
+
+chunks = [
+    # --- Contact Info Example ---
+    Document(page_content="Name: John Doe\nEmail: john.doe@example.com\nPhone: 555.123.4567\nLocation: New York\nLinkedIn: linkedin.com/in/johndoe", metadata={"section": "Contact"}),
+
+    # --- Experience Example ---
+    Document(page_content="Company: Example Corp\nTitle: Senior Software Engineer\nLocation: Remote, NY\nDates: Jan 2020 - Present\n- Led development of company's flagship product\n- Implemented CI/CD pipeline reducing deployment time by 40%\n- Mentored junior developers on best practices\n- Optimized database queries resulting in 30% performance improvement", metadata={"section": "Experience", "company": "Example Corp", "role": "Senior Software Engineer"}),
+]

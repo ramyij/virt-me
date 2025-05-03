@@ -1,4 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Virt-Me
+
+A personalized AI assistant application built with Next.js and the Vercel AI SDK that leverages retrieval-augmented generation (RAG) to provide contextually relevant responses based on your knowledge base.
+
+## Features
+
+- **AI Chat Interface**: Interact with an AI assistant powered by OpenAI's GPT-4.1
+- **Knowledge Retrieval**: Automatically retrieves relevant information from your vector database
+- **Memory Management**: Add new information to your knowledge base (in development mode)
+- **Vector Database**: Uses Pinecone for efficient similarity search and storage
+
+## Prerequisites
+
+- Node.js (v18 or higher recommended)
+- [pnpm](https://pnpm.io/installation) package manager
+- OpenAI API key
+- Pinecone account and API key
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd virt-me
+   ```
 
 ## Getting Started
 
