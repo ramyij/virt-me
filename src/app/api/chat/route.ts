@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Use 'ai' package for core Vercel AI SDK functions and types
 import { Message, streamText, tool, Tool } from 'ai'; // Added 'Tool' type import
 import { openai } from '@ai-sdk/openai';
+import { cerebras} from '@ai-sdk/cerebras'; // Import cerebras for alternative model support
 import { z } from 'zod'; // Import zod for tool parameters
 import fs from 'fs/promises'; // Import Node.js file system module
 import path from 'path'; // Import Node.js path module
@@ -33,16 +34,17 @@ const openAIApiKey = process.env.OPENAI_API_KEY;
 const pineconeApiKey = process.env.PINECONE_API_KEY;
 const pineconeHost = process.env.PINECONE_INDEX_HOST;
 const pineconeIndexName = process.env.PINECONE_INDEX;
+const cerebrasApiKey = process.env.CEREBRAS_API_KEY; // Optional Cerebras API key
 
 // --- Environment Variable Check ---
-if (!openAIApiKey || !pineconeApiKey || !pineconeHost || !pineconeIndexName) {
+if (!openAIApiKey || !cerebrasApiKey || !pineconeApiKey || !pineconeHost || !pineconeIndexName) {
     console.error("FATAL ERROR: Missing required environment variables!");
     throw new Error("Missing required environment variables!");
 }
 
 // --- Model & Retrieval/Addition Settings ---
 const embeddingModelName = 'text-embedding-3-small';
-const chatModelName = 'gpt-4.1'; // Or 'gpt-4-turbo' etc.
+const chatModelName =  `llama-4-scout-17b-16e-instruct` //'gpt-4.1'; // Or 'gpt-4-turbo' etc.
 const retrievalDocsCount = 4;
 
 
@@ -162,7 +164,8 @@ export async function POST(req: NextRequest) {
 
         // --- Call streamText with Available Tools ---
         const result = await streamText({
-            model: openai(chatModelName), // API key read from env
+            // model: openai(chatModelName), // API key read from env
+            model: cerebras(chatModelName), // Use Cerebras model with API key
             system: systemPrompt, // Use the loaded system prompt
             messages,
             temperature: 0.3,
